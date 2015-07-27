@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('config.php'); // инклудвам конфигурационния файл, защото ще ползвам mysql база данни
+require_once('config.php'); // инклудвам конфигурационния файл, защото ще ползвам mysqli база данни
 if (!$_SESSION) {
 ?>
 <!DOCTYPE html>
@@ -38,11 +38,13 @@ if (!$_SESSION) {
 						$pass2			= 		trim(htmlspecialchars($_POST['pass2']));
 						$email 			= 		trim(htmlspecialchars($_POST['email']));
 
-						$chek_username  = 		mysql_query("SELECT username FROM users WHERE username = '$username'") or die (mysql_error());;
-						$numUsers 		= 		mysql_num_rows($chek_username);
+						$query_check = "SELECT username FROM users WHERE username = '$username'";
+						$chek_username  = 		mysqli_query($connect, $query_check) or die (mysqli_error());;
+						$numUsers 		= 		mysqli_num_rows($chek_username);
 
-						$chek_email 	= 		mysql_query("SELECT email FROM users WHERE email = '$email'") or die (mysql_error());
-						$numEmail 		= 		mysql_num_rows($chek_email);
+						$queryi_email = "SELECT email FROM users WHERE email = '$email'";
+						$chek_email 	= 		mysqli_query($connect, $queryi_email) or die (mysqli_error());
+						$numEmail 		= 		mysqli_num_rows($chek_email);
 
 						$date 			= 		date("j.n.Y");
 
@@ -62,12 +64,13 @@ if (!$_SESSION) {
 
 											    	$pass1 = sha1($pass1); // криптираме паролата преди да се запише в базата данни
 
-											    	$success = mysql_query("INSERT INTO users 
+											    	$query_insert = "INSERT INTO users 
 											    		(username, email, password, date) 
 
 											    		VALUES 
 
-											    		('$username', '$email', '$pass1', '$date')") or die (mysql_error());
+											    		('$username', '$email', '$pass1', '$date')";
+											    	$success = mysqli_query($connect, $query_insert) or die (mysqli_error());
 
 											    	echo '<td colspan="2"><p class="success">Успешно се регистрира в системата!</p>
 											    	<p class="success"><a href="login.php">Вход в сайта!</a></p>

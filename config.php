@@ -1,10 +1,9 @@
 <?php
 
-  $host = "localhost";
-	$username = "root"; //root
-	$password = "p8908271860"; //  peter8908271860
-	$bd = "foods_project";  // petrovphotography    
+$connect = mysqli_connect('localhost', 'root', 'p8908271860', 'foods_project');
+mysqli_set_charset($connect, "utf8");
+if (!$connect) {
+	
+	die("Connection failed: " . mysqli_connect_error());
 
-	    $connect = mysql_connect($host, $username, $password) or die (mysql_error());
-		mysql_select_db($bd, $connect);
-		mysql_query("SET CHARACTER SET UTF8");
+}

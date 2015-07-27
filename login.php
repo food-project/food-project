@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('config.php');
+require_once('config.php');
 if (!$_SESSION) {
 ?>
 <!DOCTYPE html>
@@ -38,11 +38,13 @@ if (!$_SESSION) {
 						$username 			= 	htmlspecialchars(trim($_POST['username']));
 						$pass 			= 	htmlspecialchars(trim($_POST['pass']));
 
-						$check_username 	= 	mysql_query("SELECT email FROM users WHERE username = '$username'") or die (mysql_error());
-						$num_username 		= 	mysql_num_rows($check_username);
+						$queryi = "SELECT email FROM users WHERE username = '$username'";
+						$check_username 	= 	mysqli_query($connect, $queryi) or die (mysql_error());
+						$num_username 		= 	mysqli_num_rows($check_username);
 
-						$check_pass 	= 	mysql_query("SELECT password, username FROM users WHERE username = '$username'") or die (mysql_error());
-						$result 		= 	mysql_fetch_array($check_pass);
+						$queryi_pass = "SELECT password, username FROM users WHERE username = '$username'";
+						$check_pass 	= 	mysqli_query($connect, $queryi_pass) or die (mysql_error());
+						$result 		= 	mysqli_fetch_array($check_pass);
 
 						
 

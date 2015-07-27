@@ -25,10 +25,13 @@ body {
 }
 .header_reg_log_search{
 
-	border: 1px solid red;
+	
 	height: 100px;
 	padding-top: 50px;
 
+}
+.newclas{
+	/*border: 1px solid red;*/
 }
 .container {
 

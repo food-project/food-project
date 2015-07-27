@@ -2,7 +2,7 @@
 	require_once('template/header.php');
 ?>
 
-		тук вече ни е приложението
+		тук са ни рецептите
 		
 
 <?php
