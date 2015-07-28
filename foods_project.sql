@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `foods_project`
 --
+CREATE DATABASE IF NOT EXISTS `foods_project` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `foods_project`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Структура на таблица `basic_infos`
 --
 
+DROP TABLE IF EXISTS `basic_infos`;
 CREATE TABLE IF NOT EXISTS `basic_infos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
@@ -55,6 +58,7 @@ INSERT INTO `basic_infos` (`id`, `title`, `info`, `picture`) VALUES
 -- Структура на таблица `food_types`
 --
 
+DROP TABLE IF EXISTS `food_types`;
 CREATE TABLE IF NOT EXISTS `food_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `food_type` varchar(50) NOT NULL,
@@ -69,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `food_types` (
 -- Структура на таблица `measures`
 --
 
+DROP TABLE IF EXISTS `measures`;
 CREATE TABLE IF NOT EXISTS `measures` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `measure` varchar(30) CHARACTER SET utf8 NOT NULL,
@@ -97,6 +102,7 @@ INSERT INTO `measures` (`id`, `measure`) VALUES
 -- Структура на таблица `menu`
 --
 
+DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link_name` varchar(200) NOT NULL,
@@ -121,6 +127,7 @@ INSERT INTO `menu` (`id`, `link_name`, `link`) VALUES
 -- Структура на таблица `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product` varchar(50) NOT NULL,
@@ -139,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Структура на таблица `product_types`
 --
 
+DROP TABLE IF EXISTS `product_types`;
 CREATE TABLE IF NOT EXISTS `product_types` (
   `type_name` int(11) NOT NULL,
   PRIMARY KEY (`type_name`),
@@ -151,6 +159,7 @@ CREATE TABLE IF NOT EXISTS `product_types` (
 -- Структура на таблица `recipes`
 --
 
+DROP TABLE IF EXISTS `recipes`;
 CREATE TABLE IF NOT EXISTS `recipes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -168,6 +177,7 @@ CREATE TABLE IF NOT EXISTS `recipes` (
 -- Структура на таблица `recipe_products_quantities`
 --
 
+DROP TABLE IF EXISTS `recipe_products_quantities`;
 CREATE TABLE IF NOT EXISTS `recipe_products_quantities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `recipe_id` int(11) NOT NULL,
@@ -186,6 +196,7 @@ CREATE TABLE IF NOT EXISTS `recipe_products_quantities` (
 -- Структура на таблица `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
