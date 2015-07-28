@@ -9,6 +9,9 @@ $fetch_row = mysqli_fetch_assoc($query_s_page);
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
+    <script src="js/js-image-slider.js" type="text/javascript"></script>
+    <link href="css/generic.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
