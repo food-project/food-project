@@ -3,6 +3,7 @@ session_start();
 require_once('config.php');
 $filename = basename($_SERVER['REQUEST_URI'], '?'.$_SERVER['QUERY_STRING']);
 $select_page_titile = "SELECT * FROM menu WHERE link = '$filename'";
+require_once('functions/queries.php');
 $query_s_page = mysqli_query($connect, $select_page_titile)or die(mysqli_error());
 $fetch_row = mysqli_fetch_assoc($query_s_page);
 ?>
@@ -25,17 +26,53 @@ $fetch_row = mysqli_fetch_assoc($query_s_page);
 	<script src="jquery-1.11.3.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	<title><?php echo $fetch_row['link_name'] ?> - Рецептите</title>
+	<title><?php 
+	
+	if ($_GET) {
+		if (isset($_GET['article'])) {
+			
+			$query = "SELECT `articles`.`title_article` as art, `categories_article`.`category` as cat FROM 
+			`articles` JOIN `categories_article` ON `articles`.`id_category`=`categories_article`.`id_category` 
+			WHERE `articles`.`id_article` = '$_GET[article]'";
+			
+			$result = mysqli_fetch_assoc(queries($connect, $query));
+
+			echo $result['art'] . ' - ' . $result['cat'] . ' - ' . $fetch_row['link_name'];			
+
+		}elseif(isset($_GET['category'])){			
+
+
+			$query = "SELECT category FROM categories_article WHERE id_category = '$_GET[category]'";
+			
+			$result = mysqli_fetch_assoc(queries($connect, $query));
+			echo $result['category'] . ' - ' . $fetch_row['link_name'];
+
+		}
+	}else{
+
+		if ($fetch_row['link_name']) {
+			echo $fetch_row['link_name'];
+		}else{
+			echo $_SESSION['user'];
+		}
+		
+
+	}
+	
+
+	?> - Рецептите</title>
 </head>
 <body>
-
 	<div class="container">
 	<div class="row">
 		<div class="header col-md-12 just">
 			<div class="row">
+			<a href="index.php">
 				<div class="header_text col-xs-4">
-					<h3>Приложение за рецепти</h3>
+					<h3>рецептите</h3>
+					<p class="header_label">"диабетът не е диагноза, а начин на живот"</p>
 				</div>
+			</a>
 				<div class="header_reg_log_search col-md-4 col-md-offset-4">
 					
 
@@ -59,8 +96,8 @@ $fetch_row = mysqli_fetch_assoc($query_s_page);
 
 								if ($_SESSION) {
 									
-									echo "Здравей, ";
-									echo  $_SESSION['user'] . '!';
+									echo "Здравей, <a href='main.php'>";
+									echo  $_SESSION['user'] . '</a>!';
 									echo ' <a title="Изход" href="logout.php">Изход</a>';
 								}else{
 									echo "<a title='Регистрация'' href='register.php'>Регистрация </a> ";
